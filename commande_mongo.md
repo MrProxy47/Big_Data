@@ -5,12 +5,13 @@ use masterclass_project
 db.createUser(
 {	user: "joe",
 	pwd: "doe",
-
 	roles:[{ role: "dbOwner", db: "masterclass_project" }]});
+	
+# Connect with user:
+db = connect("localhost:27017/masterclass_project", "Joe", "Doe");
 
 # Import restaurants:
-mongoimport.exe --db masterclass_project --collection restaurants --file C:\Users\felix\Documents\MasterClass_Big_Data\restaurants.json
-
+mongoimport.exe --db masterclass_project --collection restaurants --file C:\Users\Shadow\WebstormProjects\MasterClass_Big_Data\restaurants.json
 # Insert random price
 db.restaurants.updateMany(
   { price: { $exists: false } },

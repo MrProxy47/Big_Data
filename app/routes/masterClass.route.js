@@ -8,7 +8,10 @@ module.exports = app => {
   
    
     router.get("/:id", restaurants.findOne);
-  
+
+
+    router.get("/", restaurants.find);
+
     
     router.put("/:id", restaurants.update);
   

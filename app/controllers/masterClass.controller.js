@@ -29,6 +29,30 @@ exports.create = (req, res) => {
   };
 
 
+exports.find = (req, res) => {
+
+    Restaurant.find({
+        location:
+            { $near:
+                    {
+                        $geometry: {type: "Point", coordinates: [req.params.long_coordinates, req.params.lat_coordinates]},
+                        $maxDistance: 5000
+                    }
+
+            }
+    })
+        .then(data => {
+            if (!data)
+                res.status(404).send({ message: "Not found restaurant"});
+            else res.send(data);
+        })
+        .catch(err => {
+            res
+                .status(500)
+                .send({ message: "Error retrieving restaurant"});
+        });
+};
+
 
 exports.findOne = (req, res) => {
     const id = req.params.id;
